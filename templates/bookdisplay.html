@@ -1,0 +1,48 @@
+{% extends "base4.html" %}
+
+{% block body %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+ <div class="card bg-light ms-4 me-4 mb-4">
+      <div class="card-header">
+          <i class="fa fa-book"></i><font color="green"> Available Books in the Library</font>
+      </div>
+      <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" action="{% url 'bookdisplay' %}">
+
+    </form>
+      <div class="card-body">
+        <p class="card-text">
+          <div class="table-responsive">
+
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                    <th scope="col" ><font color="red"> Book Name </font></th>
+                    <th scope="col"><font color="red"> Author </font></th>
+                    <th scope="col"><font color="red"> Action </font></th>
+                </tr>
+              </thead>
+                <tbody>
+                 {% for i in result %}
+                <tr>
+                    <td scope="col"><strong>{{ i.bk_title }}</strong></td>
+                    <td scope="col"><strong>{{ i.bk_author }}</strong></td>
+                    <td ><a href="{% url 'requestbook' i.bk_id%}" class="btn btn-sm btn-primary">View</a>
+
+                </tr>
+                 {% endfor %}
+                </tbody>
+            </table>
+
+      </div>
+      </div>
+ </div>
+</body>
+</html>
+{% endblock %}

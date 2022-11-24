@@ -1,0 +1,296 @@
+{% extends "base3.html" %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block body %}
+  <h3 class="text-center m-4">Add Book</h3>
+  {% if success %}
+    <div class="alert alert-success" role="alert">
+     New book added successfully.
+      <a href="{% url 'display' %}" class="alert-link">Go to Home Page.</a>
+    </div>
+  {% else %}
+    <div class="row justify-content-center">
+      <div class="col-6">
+        <div class="card bg-light mb-3">
+          <div class="card-header">
+            <i class="fa-solid fa-book"></i> Adding Books
+          </div>
+          <div class="card-body">
+            <form action="{% url 'add' %}" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+
+              <b style="color: blue; margin-left: 1px">Title</b>
+              {% render_field form.bk_title class="form-control" name="bk_title" type="text" placeholder="Enter title" onkeyup='titleValidation(this)'  %}
+                <span class="error-msg" id="bk_title"> </span><br>
+              <b style="color: blue; margin-left: 1px">Author</b>
+              {% render_field form.bk_author class="form-control" placeholder="Enter Author"  onkeyup='authorValidation(this)' %}
+              <span class="error-msg" id="bk_author"> </span><br>
+              <b style="color: blue; margin-left: 1px">Category</b>
+              {% render_field form.bk_cat class="form-control" placeholder="Enter Category" onkeyup='categoryValidation(this)' %}
+              <span class="error-msg" id="bk_cat"> </span><br>
+              <b style="color: blue; margin-left: 1px">Publisher</b>
+              {% render_field form.bk_publisher class="form-control" placeholder="Enter Publisher" onkeyup='publisherValidation(this)'  %}
+              <span class="error-msg" id="bk_publisher"> </span><br>
+              <b style="color: blue; margin-left: 1px">Published Year </b>
+              {% render_field form.bk_pubyear class="form-control" placeholder="Enter Published Year"  onkeyup='publishedyearValidation(this)' %}
+              <span class="error-msg" id="bk_pubyear"> </span><br>
+              <b style="color: blue; margin-left: 1px">Published Agency</b>
+
+              {% render_field form.bk_pubagency class="form-control" placeholder="Enter Published Agency" onkeyup='publishedagencyValidation(this)'  %}
+               <span class="error-msg" id="bk_pubagency"> </span><br>
+              <b style="color: blue; margin-left: 1px">Edition</b>
+              {% render_field form.bk_edition class="form-control" placeholder="Enter Edition" onkeyup='editionValidation(this)' %}
+               <span class="error-msg" id="bk_edition"> </span><br>
+              <b style="color: blue; margin-left: 1px">ISBN</b>
+              {% render_field form.bk_isbn class="form-control" placeholder="Enter ISBN" onkeyup='isbnValidation(this)' %}
+              <span class="error-msg" id="bk_isbn"> </span><br>
+              <b style="color: blue; margin-left: 1px">No Of Pages</b>
+              {% render_field form.bk_noofpages class="form-control" placeholder="Enter No of pages" onkeyup='pageValidation(this)' %}
+              <span class="error-msg" id="bk_noofpages"> </span><br>
+              <b style="color: blue; margin-left: 1px">Price</b>
+              {% render_field form.bk_price class="form-control" placeholder="Enter Price" onkeyup='priceValidation(this)' %}
+              <span class="error-msg" id="bk_price"> </span><br>
+              <b style="color: blue; margin-left: 1px">Stock</b>
+              {% render_field form.bk_stno class="form-control" placeholder="Enter Stock"  onkeyup='stockValidation(this)' %}
+               <span class="error-msg" id="bk_stno"> </span><br>
+              <br>
+              <button type="submit" class="btn btn-primary">Add</button>
+              <a href="{% url 'display' %}" class="btn btn-secondary">Cancel</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+<script>
+  function titleValidation(inputTxt){
+
+    var regx = /^[a-zA-Z]/;
+    var textField = document.getElementById("bk_title");
+
+    if(inputTxt.value != '' ){
+
+        if(inputTxt.value.length >= 2){
+
+            if(inputTxt.value.match(regx)){
+                textField.textContent = '';
+                textField.style.color = "green";
+
+            }else{
+                textField.textContent = 'only characters allowded';
+                textField.style.color = "red";
+            }
+        }else{
+            textField.textContent = 'your input must be more than two chracters';
+            textField.style.color = "red";
+        }
+    }else{
+        textField.textContent = 'your input is empty';
+
+        textField.style.color = "red";
+    }
+}
+  function authorValidation(inputTxt){
+
+    var regx = /^[a-zA-Z]/;
+    var textField = document.getElementById("bk_author");
+
+    if(inputTxt.value != '' ){
+
+        if(inputTxt.value.length >= 2){
+
+            if(inputTxt.value.match(regx)){
+                textField.textContent = '';
+                textField.style.color = "green";
+
+            }else{
+                textField.textContent = 'only characters allowded';
+                textField.style.color = "red";
+            }
+        }else{
+            textField.textContent = 'your input must be more than two chracters';
+            textField.style.color = "red";
+        }
+    }else{
+        textField.textContent = 'your input is empty';
+
+        textField.style.color = "red";
+    }
+}
+function categoryValidation(inputTxt){
+
+    var regx = /^[a-zA-Z]+$/;
+    var textField = document.getElementById("bk_cat");
+
+    if(inputTxt.value != '' ){
+        textField.textContent = 'your input is empty';
+
+        textField.style.color = "red";
+    }
+}
+function publisherValidation(inputTxt){
+
+    var regx = /^[a-zA-Z]/;
+    var textField = document.getElementById("bk_publisher");
+
+    if(inputTxt.value != '' ){
+
+        if(inputTxt.value.length >= 2){
+
+            if(inputTxt.value.match(regx)){
+                textField.textContent = '';
+                textField.style.color = "green";
+
+            }else{
+                textField.textContent = 'only characters allowded';
+                textField.style.color = "red";
+            }
+        }else{
+            textField.textContent = 'your input must be more than two chracters';
+            textField.style.color = "red";
+        }
+    }else{
+        textField.textContent = 'your input is empty';
+
+        textField.style.color = "red";
+    }
+}
+function publishedyearValidation(inputTxt){
+
+    var regx = /^[0-9][0-9]{3}$/;
+    var textField = document.getElementById("bk_pubyear");
+
+    if(inputTxt.value != '' ){
+        if(inputTxt.value.match(regx)){
+            textField.textContent = '';
+            textField.style.color = "green";
+            }else{
+                textField.textContent = '**not valid year';
+                textField.style.color = "red";
+            }
+    }else{
+        textField.textContent = 'your input is empty';
+        textField.style.color = "red";
+    }
+}
+function publishedagencyValidation(inputTxt){
+
+    var regx =  /^[a-zA-Z]/;
+    var textField = document.getElementById("bk_pubagency");
+
+    if(inputTxt.value != '' ){
+
+        if(inputTxt.value.length >= 2){
+
+            if(inputTxt.value.match(regx)){
+                textField.textContent = '';
+                textField.style.color = "green";
+
+            }else{
+                textField.textContent = 'only characters allowded';
+                textField.style.color = "red";
+            }
+        }else{
+            textField.textContent = 'your input must be more than two chracters';
+            textField.style.color = "red";
+        }
+    }else{
+        textField.textContent = 'your input is empty';
+
+        textField.style.color = "red";
+    }
+}
+function editionValidation(inputTxt){
+
+    var regx = /^[0-9]/;
+    var textField = document.getElementById("bk_edition");
+
+    if(inputTxt.value != '' ){
+        if(inputTxt.value.match(regx)){
+            textField.textContent = '';
+            textField.style.color = "green";
+            }else{
+                textField.textContent = '**not valid edition';
+                textField.style.color = "red";
+            }
+    }else{
+        textField.textContent = 'your input is empty';
+        textField.style.color = "red";
+    }
+}
+function isbnValidation(inputTxt){
+
+    var regx = /^[0-9][0-9]{5}$/;
+    var textField = document.getElementById("bk_isbn");
+
+    if(inputTxt.value != '' ){
+        if(inputTxt.value.match(regx)){
+            textField.textContent = '';
+            textField.style.color = "green";
+            }else{
+                textField.textContent = '**not valid isbn number';
+                textField.style.color = "red";
+            }
+    }else{
+        textField.textContent = 'your input is empty';
+        textField.style.color = "red";
+    }
+}
+function pageValidation(inputTxt){
+
+    var regx = /^[0-9][0-9]/;
+    var textField = document.getElementById("bk_noofpages");
+
+    if(inputTxt.value != '' ){
+        if(inputTxt.value.match(regx)){
+            textField.textContent = '';
+            textField.style.color = "green";
+            }else{
+                textField.textContent = '**not valid page number';
+                textField.style.color = "red";
+            }
+    }else{
+        textField.textContent = 'your input is empty';
+        textField.style.color = "red";
+    }
+}
+function priceValidation(inputTxt){
+
+    var regx = /^[0-9][0-9]/;
+    var textField = document.getElementById("bk_price");
+
+    if(inputTxt.value != '' ){
+        if(inputTxt.value.match(regx)){
+            textField.textContent = '';
+            textField.style.color = "green";
+            }else{
+                textField.textContent = '**not valid price';
+                textField.style.color = "red";
+            }
+    }else{
+        textField.textContent = 'your input is empty';
+        textField.style.color = "red";
+    }
+}
+function stockValidation(inputTxt){
+
+    var regx = /^[0-9]/;
+    var textField = document.getElementById("bk_stno");
+
+    if(inputTxt.value != '' ){
+        if(inputTxt.value.match(regx)){
+            textField.textContent = '';
+            textField.style.color = "green";
+            }else{
+                textField.textContent = '**not valid stock number';
+                textField.style.color = "red";
+            }
+    }else{
+        textField.textContent = 'your input is empty';
+        textField.style.color = "red";
+    }
+}
+
+</script>
+{% endblock %}

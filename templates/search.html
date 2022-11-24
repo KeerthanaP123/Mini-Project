@@ -1,0 +1,34 @@
+{% extends "base4.html" %}
+{% load static %}
+{% block body %}
+      <div class="card-body">
+        <p class="card-text">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Title</th>
+                  <th scope="col">Author</th>
+                  <th scope="col">Category</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for i in book %}
+                  <tr>
+                    <td>{{ i.bk_title  }}</td>
+                    <td>{{ i.bk_author }}</td>
+                     <td>{{ i.bk_cat }}</td>
+
+
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

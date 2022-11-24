@@ -1,0 +1,699 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% include 'Message.html' %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>Registration</title>
+<!-- meta_tags-->
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <meta name="keywords" content="Library Membership form A Flat Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
+   <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+   function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Meta_tag_Keywords-->
+<!--css_files-->
+   <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}"/>
+   <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all"/><!--stylesheet-->
+   <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}"><!--font_wesome_icons-->
+   <link href="//fonts.googleapis.com/css?family=PT+Sans+Caption" rel="stylesheet"><!--online_fonts-->
+   <link href="//fonts.googleapis.com/css?family=Old+Standard+TT" rel="stylesheet"><!--online_fonts-->
+<!--//css_files-->
+</head>
+<body>
+<!--<div class="w3l-head">
+<h1>library membership form</h1>
+</div>!-->
+<div class="w3ls-form">
+   <script>document.getElementById("myForm").reset();</script>
+<form onclick="validation()"  action="{% url 'reg' %}" method="POST" name="logform" id="myForm">
+   {% csrf_token %}
+   {% include 'Message.html' %}
+      <div class="w3l-last-grid1">
+         <div class="w3l-grid1">
+            <label class="text">First name</label>
+            <div class="w3l-div">
+               <i class="fa fa-user" aria-hidden="true"></i>
+               <input type="text" name="fname" placeholder="First name"    onkeyup='fnameValidation(this)' required/>
+               <span class="error-msg" id="fname"> </span><br>
+            </div>
+
+         </div>
+         <div class="w3l-grid2">
+         <label class="text">Last name</label>
+         <div class="w3l-div">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <input type="text" name="lname" placeholder="last name"  onkeyup='lnameValidation(this)' required/>
+            <span class="error-msg" id="lname"> </span><br>
+         </div>
+         </div>
+         <div class="clear"></div>
+      </div>
+      <div class="w3l-last-grid1">
+         <div class="w3l-grid1">
+            <label class="text">Email</label>
+            <div class="w3l-div">
+               <i class="fa fa-envelope-o" aria-hidden="true"></i>
+               <input type="email" name="email" placeholder="e-mail" onkeyup='emailValidation(this)' required/>
+               <span class="error-msg" id="email"> </span><br>
+            </div>
+         </div>
+         <div class="w3l-grid2">
+            <label class="text">Phone number</label>
+            <div class="w3l-div">
+               <i class="fa fa-phone" aria-hidden="true"></i>
+               <input type="text" name="contact" placeholder="phone number" onkeyup='phoneValidation(this)' required/>
+               <span class="error-msg" id="contact">
+                            </span><br>
+            </div>
+         </div>
+         <div class="clear"></div>
+      </div>
+      <div class="w3l-last-grid1">
+         <div class="w3l-grid1">
+            <label class="text">Address</label>
+            <div class="w3l-div">
+               <i class="fa fa-location-arrow" aria-hidden="true"></i>
+               <input type="text" name="address" placeholder="current address" onkeyup='addressValidation(this)' required/>
+               <span class="error-msg" id="address">
+
+            </div>
+         </div>
+         <div class="w3l-grid2">
+            <label class="text">City</label>
+            <div class="w3l-div">
+               <i class="fa fa-map-marker" aria-hidden="true"></i>
+               <input type="text" name="city" placeholder="city" onkeyup='cityValidation(this)' required/>
+                      <span class="error-msg" id="city">
+            </div>
+         </div>
+         <div class="clear"></div>
+      </div>
+
+      <div class="w3l-right-grid1">
+         <div class="w3l-grid1">
+            <label class="text">State</label>
+            <div class="w3l-div">
+               <i class="fa fa-map-marker" aria-hidden="true"></i>
+               <input type="text" name="state" placeholder="state/province"  onkeyup='stateValidation(this)' required/>
+               <span class="error-msg" id="state"> </span><br>
+            </div>
+         </div>
+         <div class="w3l-grid2">
+            <label class="text">Pincode</label>
+            <div class="w3l-div">
+               <i class="fa fa-address-card-o" aria-hidden="true"></i>
+               <input type="text" name="pincode" placeholder="postal" onkeyup='pincodeValidation(this)' required/>
+               <span class="error-msg" id="pincode"></span><br>
+            </div>
+         </div>
+         <div class="clear"></div>
+      </div>
+<div class="w3l-right-grid1">
+         <div class="w3l-grid1">
+            <label class="text">Dob</label>
+            <div class="w3l-div">
+               <i class="fa fa-calendar"  aria-hidden="true"></i>
+               <input type="date" class="date" name="dob" placeholder="DD-MM-YYYY" id="dob1" min="1990-01-01" max="2010-01-01">
+               <span class="error-msg" id="dob"> </span><br>
+            </div>
+         </div>
+                <span id="error_dob"></span>
+   <div class="w3l-grid1">
+			<label class="text">Role
+               <span class="error-msg" id="rolee">?</span></label>
+				<div class="w3l-div">
+				<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+					<select class="form-contro3" required="" name="roles" id="roles">
+                       <option>Roles</option>
+						<option value="is_customer">customer</option>
+						<option value="is_librarian">librarian</option>
+					</select>
+				</div>
+		</div>
+<!--         <div class="w3l-grid2">-->
+<!--            <label class="text">Photo</label>-->
+<!--            <div class="w3l-div">-->
+<!--               <i class="fa fa-file-image-o" aria-hidden="true"></i>-->
+<!--               <input type="file" name="photo" placeholder="photo" id="pho" accept="image/png,image/jpeg,image/jpg"/>-->
+<!--               <span class="error-msg" id="photo" ></span><br>-->
+<!--            </div>-->
+<!--         </div>-->
+<!--         <div class="clear"></div>-->
+      </div>
+
+      <div class="w3l-grid2">
+         <label class="text">Password</label>
+         <div class="w3l-div">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+            <input type="password" name="password" placeholder=" Password" id="pass1" onkeyup='passwordValidation(this)' required/>
+            <span class="error-msg" id="password"></span><br>
+
+         </div>
+      </div>
+      <div class="w3l-grid2">
+         <label class="text">Confirm Password</label>
+         <div class="w3l-div">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+            <input type="password" name="confirmpassword" placeholder="Confirm Password"id="pass2" onkeyup='cpasswordValidation(this)' required/>
+            <span class="error-msg" id="confirmpassword"> </span><br>
+         </div>
+      </div>
+      <div class="clear"></div>
+      <div class="w3ls-submit">
+<!--         <input type="submit" name="submit" value="register">-->
+         <input type="submit" name="submit" value="register">
+      </div>
+</form>
+</div>
+<script>
+
+      function validation(){
+        var fname=document.getElementById('fname').value;
+        var regx = /^[A-Za-z]+$/;
+
+          if(fname==""){
+             document.getElementById('fname').innerHTML="**Please enter your firstname";
+             return false;
+          }
+          else{
+             document.getElementById('fname').innerHTML="";
+          }
+
+          if((fname.length<=3)||(fname.length>20)){
+             document.getElementById('fname').innerHTML="**your firstname must include more characters";
+             return false;
+          }
+          else{
+             document.getElementById('fname').innerHTML="";
+          }
+
+
+          if(!fname.match(/^[A-Za-z]+$/)){
+
+             document.getElementById('fname').innerHTML="**Only characters are allowed";
+             return false;
+
+          }
+          else{
+             document.getElementById('fname').innerHTML="";
+          }
+
+
+          var lname=document.getElementById('lname').value;
+          if(lname==""){
+             document.getElementById('lname').innerHTML="**Please enter your lastname";
+             return false;
+          }
+          else{
+             document.getElementById('lname').innerHTML="";
+          }
+
+          if((lname.length<=1)||(lname.length>20)){
+             document.getElementById('lname').innerHTML="**your firstname must include more characters";
+             return false;
+          }
+          else{
+             document.getElementById('lname').innerHTML="";
+          }
+
+
+          if(!lname.match(/^[A-Za-z\s, ]+$/)){
+
+            document.getElementById('lname').innerHTML="**Only characters are allowed";
+            return false;
+
+            }
+            else{
+            document.getElementById('lname').innerHTML="";
+            }
+
+        var detail=document.getElementById('address').value;
+
+        if(detail==""){
+        document.getElementById('address').innerHTML="**Please enter your address";
+        return false;
+        }
+        else{
+        document.getElementById('addr').innerHTML="";
+        }
+        if((detail.length<=4)||(detail.length>60)){
+
+        document.getElementById('address').innerHTML="**User length must include more characters";
+        return false;
+
+        }
+        else{
+        document.getElementById('address').innerHTML="";
+        }
+
+        if (!detail.match(/^[a-zA-Z\s,()'-]*$/))
+        {
+            document.getElementById('email').innerHTML="**enter a Valid Email";
+            return false;
+        }
+        else{
+            document.getElementById('email').value = "";
+        }
+
+        var val = document.getElementById('email').value;
+        if(val==""){
+        document.getElementById('mail').innerHTML="**Please enter your address";
+        return false;
+        }
+        else{
+        document.getElementById('email').innerHTML="";
+        }
+
+        if (!val.match(/([A-z0-9_\-\.]){1,}\@([A-z0-9_\-\.]){1,}\.([A-Za-z]){2,4}$/))
+        {
+            document.getElementById('mail').innerHTML="**enter a Valid Email";
+            return false;
+        }
+        else{
+            document.getElementById('email').value = "";
+        }
+
+
+        var phon=document.getElementById('contact').value;
+        if(phon==""){
+
+            document.getElementById('contact').innerHTML="**Please enter your phone number";
+            return false;
+        }
+        else{
+            document.getElementById('contact').innerHTML="";
+        }
+        if(!phon.match(/^[6-9][0-9]{9}$/)){
+
+            document.getElementById('contact').innerHTML="**Please enter a valid phone number";
+            return false;
+        }
+        else{
+            document.getElementById('contact').innerHTML="";
+        }
+        if(phon.length!=10){
+
+            document.getElementById('contact').innerHTML="**Phone number must be 10 digits only";
+            return false;
+        }
+        else{
+            document.getElementById('contact').innerHTML="";
+        }
+
+
+        var cities=document.getElementById('city').value;
+        if(cities==""){
+        document.getElementById('city').innerHTML="**Please enter your city";
+        return false;
+        }
+        else{
+            document.getElementById('city').innerHTML="";
+        }
+        if(!cities.match(/^[a-zA-Z\s, ]+$/)){
+        document.getElementById('city').innerHTML="**enter a valid city";
+        return false;
+        }
+        else{
+        document.getElementById('city').innerHTML="";
+        }
+        if((cities.length<=4)||(detail.length>60)){
+
+        document.getElementById('city').innerHTML="**User length must include more characters";
+        return false;
+
+        }
+        else{
+        document.getElementById('city').innerHTML="";
+        }
+
+        var cities=document.getElementById('state').value;
+        if(cities==""){
+        document.getElementById('state').innerHTML="**Please enter your state";
+        return false;
+        }
+        else{
+            document.getElementById('state').innerHTML="";
+        }
+        if(!cities.match(/^[a-zA-Z\s, ]+$/)){
+        document.getElementById('state').innerHTML="**enter a valid state";
+        return false;
+        }
+        else{
+        document.getElementById('state').innerHTML="";
+        }
+        if((cities.length<=3)||(detail.length>60)){
+
+        document.getElementById('state').innerHTML="**User length must include more characters";
+        return false;
+
+        }
+        else{
+        document.getElementById('state').innerHTML="";
+        }
+
+        var code=document.getElementById('pincode').value;
+        if (code=="")
+        {
+            document.getElementById('pincode').innerHTML="**Please enter the pincode";
+            return false;
+        }
+        else
+        {
+            document.getElementById('pincode').innerHTML="";
+        }
+
+        if(!code.match(/^[6][0-9]{5}$/)){
+
+        document.getElementById('pincode').innerHTML="**enter a valid pincode";
+        return false;
+
+        }
+        else{
+        document.getElementById('pincode').innerHTML="";
+        }
+        if(code.length!=6){
+
+        document.getElementById('pincode').innerHTML="**enter a valid pincode";
+        return false;
+        }
+        else{
+        document.getElementById('pincode').innerHTML="";
+        }
+
+        // // var fe=document.getElementById('f').Checked;
+        // // var ma=document.getElementById('m').checked;
+        // // if(ma == true) {
+        // //         document.getElementById("dis").innerHTML ="You have selected male any";
+        // //         return false;
+        // //     }
+        // //     else if(fe == true){
+        // //         document.getElementById("dis").innerHTML = "You have selected female any";
+        // //         return false;
+        // //     }
+        // //     else{
+        // //         document.getElementById("dis").innerHTML = "You have not selected  any";
+        // //     }
+
+        var val = document.getElementById('password').value;
+        if(val=="")
+        {
+            document.getElementById('pass1').innerHTML="**Password can't be null!!";
+            return false;
+        }
+        else{
+            document.getElementById('pass1').value = "";
+        }
+        if (!val.match(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}/))
+        {
+            document.getElementById('pass1').innerHTML="**Must contain at least one number and one uppercase and lowercase letter and aleast 5 characters'";
+            return false;
+        }
+        else{
+            document.getElementById('pass1').value = "";
+        }
+
+        // var val = document.getElementById('password').value;
+        // var pattern = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}/;
+        // if (val != pattern)
+        // {
+        //     document.getElementById('pass1').innerHTML="**Must contain at least one number and one uppercase and lowercase letter and aleast 5 characters";
+        //     return false;
+        // }
+        // else{
+        //     document.getElementById('pass1').value = "";
+        // }
+
+        var ps2=document.getElementById('confirmpassword').value;
+        if(ps2==""){
+        document.getElementById('pass2').innerHTML="**confrim password can't be null!!";
+        return false;
+        }
+        else{
+        document.getElementById('pass2').innerHTML="";
+        }
+        if(ps2!= document.getElementById('password').value){
+        document.getElementById('pass2').innerHTML="**passwords should be matching";
+        return false;
+        }
+        else{
+        document.getElementById('pass2').innerHTML="";
+        }
+
+        // if(val!=ps2){
+        // document.getElementById('pass2').innerHTML="**passwords should be matching";
+        // return false;
+        // }
+        // else{
+        // document.getElementById('pass2').innerHTML="";
+        // }
+}
+
+    </script>
+<script type="text/javascript">
+function fnameValidation(inputTxt){
+
+    var regx = /^[a-zA-Z]+$/;
+    var textField = document.getElementById("fname");
+
+    if(inputTxt.value != '' ){
+
+        if(inputTxt.value.length >= 2){
+
+            if(inputTxt.value.match(regx)){
+                textField.textContent = '';
+                textField.style.color = "green";
+
+            }else{
+                textField.textContent = 'only characters allowded';
+                textField.style.color = "red";
+            }
+        }else{
+            textField.textContent = 'your input must me more than two chracters';
+            textField.style.color = "red";
+        }
+    }else{
+        textField.textContent = 'your input is empty';
+
+        textField.style.color = "red";
+    }
+}
+
+function lnameValidation(inputTxt){
+
+    var regx = /^[a-zA-Z  ]+$/;
+    var textField = document.getElementById("lname");
+
+    if(inputTxt.value != '' ){
+
+        if(inputTxt.value.length >= 1){
+
+            if(inputTxt.value.match(regx)){
+                textField.textContent = '';
+                textField.style.color = "green";
+
+            }else{
+                textField.textContent = 'only characters allowded';
+                textField.style.color = "red";
+            }
+        }else{
+            textField.textContent = 'your input mut me more than two chracters';
+            textField.style.color = "red";
+        }
+    }else{
+        textField.textContent = 'your input is empty';
+        textField.style.color = "red";
+    }
+}
+
+function addressValidation(inputTxt){
+
+    var regx = /^[a-zA-Z-()]+$/;
+    var textField = document.getElementById("address");
+
+    if(inputTxt.value != '' ){
+
+        if(inputTxt.value.length >= 4){
+
+            if(inputTxt.value.match(regx)){
+                textField.textContent = '';
+                textField.style.color = "green";
+
+            }else{
+                textField.textContent = 'only characters allowded';
+                textField.style.color = "red";
+            }
+        }else{
+            textField.textContent = 'your input mut me more than two chracters';
+            textField.style.color = "red";
+        }
+    }else{
+        textField.textContent = 'your input is empty';
+        textField.style.color = "red";
+    }
+}
+
+
+function emailValidation(inputTxt){
+    // ^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$
+    var regx = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+    var textField = document.getElementById("email");
+
+    if(inputTxt.value != '' ){
+        if(inputTxt.value.match(regx)){
+            textField.textContent = '';
+            textField.style.color = "green";
+        }else{
+            textField.textContent = 'email is not valid!!!';
+            textField.style.color = "red";
+        }
+    }else{
+        textField.textContent = 'your input is empty';
+        textField.style.color = "red";
+    }
+}
+
+function phoneValidation(inputTxt){
+
+    var regx = /^[6-9][0-9]{9}$/;
+    var textField = document.getElementById("contact");
+
+    if(inputTxt.value != '' ){
+        if(inputTxt.value.match(regx)){
+            textField.textContent = '';
+            textField.style.color = "green";
+            }else{
+                textField.textContent = '**not valid phone number';
+                textField.style.color = "red";
+            }
+    }else{
+        textField.textContent = 'your input is empty';
+        textField.style.color = "red";
+    }
+}
+
+
+function cityValidation(inputTxt){
+
+    var regx = /^[a-zA-Z]+$/;
+    var textField = document.getElementById("city");
+
+    if(inputTxt.value != '' ){
+
+        if(inputTxt.value.length >= 1){
+
+            if(inputTxt.value.match(regx)){
+                textField.textContent = '';
+                textField.style.color = "green";
+
+            }else{
+                textField.textContent = 'only characters allowded';
+                textField.style.color = "red";
+            }
+        }else{
+            textField.textContent = 'your input mut me more than two chracters';
+            textField.style.color = "red";
+        }
+    }else{
+        textField.textContent = 'your input is empty';
+        textField.style.color = "red";
+    }
+}
+
+function stateValidation(inputTxt){
+
+    var regx = /^[a-zA-Z]+$/;
+    var textField = document.getElementById("state");
+
+    if(inputTxt.value != '' ){
+
+        if(inputTxt.value.length >= 1){
+
+            if(inputTxt.value.match(regx)){
+                textField.textContent = '';
+                textField.style.color = "green";
+
+            }else{
+                textField.textContent = 'only characters allowded';
+                textField.style.color = "red";
+            }
+        }else{
+            textField.textContent = 'your input mut me more than two chracters';
+            textField.style.color = "red";
+        }
+    }else{
+        textField.textContent = 'your input is empty';
+        textField.style.color = "red";
+    }
+}
+
+function pincodeValidation(inputTxt){
+
+    var regx = /^[6][0-9]{5}$/;
+    var textField = document.getElementById("pincode");
+
+    if(inputTxt.value != '' ){
+            if(inputTxt.value.match(regx)){
+                textField.textContent = '';
+                textField.style.color = "green";
+
+            }else{
+                textField.textContent = 'only valid pincode';
+                textField.style.color = "red";
+            }
+    }else{
+        textField.textContent = 'your input is empty';
+        textField.style.color = "red";
+    }
+}
+
+
+function passwordValidation(inputTxt){
+
+    var regx = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}/;
+    var textField = document.getElementById("password");
+
+    if(inputTxt.value != '' ){
+            if(inputTxt.value.match(regx)){
+                textField.textContent = '';
+                textField.style.color = "green";
+
+            }else{
+                textField.textContent = 'Must contain at least one number and one uppercase and lowercase letter and aleast 5 characters';
+                textField.style.color = "red";
+            }
+    }else{
+        textField.textContent = 'your input is empty';
+        textField.style.color = "red";
+    }
+}
+
+
+function cpasswordValidation(inputTxt){
+
+    var regx =  document.getElementById("pass1").value;
+    var regy =  document.getElementById("pass2").value;
+    var textField = document.getElementById("confirmpassword");
+    var textField1 = document.getElementById("password");
+
+    if(inputTxt.value != '' ){
+            if(regx == regy){
+                textField.textContent = '';
+                textField.style.color = "green";
+
+            }else{
+                textField.textContent = 'not match';
+                textField.style.color = "red";
+            }
+        }else{
+            textField.textContent = '';
+            textField.style.color = "red";
+        }
+}
+
+  </script>
+
+{% endblock %}
+</body>
+</html>
+

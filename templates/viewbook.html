@@ -1,0 +1,142 @@
+{% extends 'base2.html' %}
+{% load static %}
+
+
+{% block body %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+<style media="screen">
+table.redTable {
+border: 2px solid #A40808;
+background-color: #f3f5f2;
+width: 100%;
+text-align: center;
+border-collapse: collapse;
+}
+table.redTable td, table.redTable th {
+border: 1px solid #AAAAAA;
+padding: 3px 2px;
+}
+table.redTable tbody td {
+font-size: 13px;
+}
+table.redTable tr:nth-child(even) {
+background: #f3f5f2;
+}
+table.redTable thead {
+background: #f3f5f2;
+}
+table.redTable thead th {
+font-size: 19px;
+font-weight: bold;
+color: #0a0a0a;
+text-align: center;
+border-left: 1px solid #0a0a0a;
+}
+table.redTable thead th:first-child {
+border-left: none;
+}
+
+table.redTable tfoot {
+font-size: 13px;
+font-weight: bold;
+color: #FFFFFF;
+background: #0a0a0a;
+}
+table.redTable tfoot td {
+font-size: 13px;
+}
+table.redTable tfoot .links {
+text-align: right;
+}
+table.redTable tfoot .links a{
+display: inline-block;
+background: #FFFFFF;
+color: #0a0a0a;
+padding: 2px 2px;
+border-radius: 2px;
+}
+</style>
+  </head>
+  <body>
+<!--<form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" action="">-->
+<!--       <div class="input-group">-->
+<!--           <input type="text" class="form-control" name="query" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">-->
+<!--            <div class="input-group-append">-->
+<!--               <button class="btn btn-primary" type="submit">-->
+<!--                   <i class="fas fa-search"></i>-->
+<!--                </button>-->
+<!--         </div>-->
+<!--      </div>-->
+<!--    </form>-->
+
+{% if books%}
+<table class="redTable">
+<thead>
+<tr>
+    <th>Book ID</th>
+
+<th>Book Name</th>
+<th>Author</th>
+<th>Category</th>
+<th>Publisher</th>
+    <th>Published Year</th>
+<th>Published Agency</th>
+<th>Book Edition</th>
+<th>ISBN no</th>
+
+    <th>No Of Pages</th>
+<th>Price</th>
+    <th>Stock</th>
+    <th>Action</th>
+
+</tr>
+</thead>
+<tfoot>
+<tr>
+<td colspan="4" rowspan="4">
+<div class="links"></div>
+</td>
+</tr>
+</tfoot>
+<tbody>
+  {% for book in books %}
+    <tr>
+        <td>{{book.bk_id}}</td>
+      <td>{{book.bk_title}}</td>
+    <td>{{book.bk_author}}</td>
+     <td>{{book.bk_category}}</td>
+      <td>{{book.bk_publisher}}</td>
+         <td>{{book.bk_pubyear}}</td>
+    <td>{{book.bk_pubagency}}</td>
+     <td>{{book.bk_edition}}</td>
+      <td>{{book.bk_isbn}}</td>
+             <td>{{book.bk_noofpages}}</td>
+      <td>{{book.bk_price}}</td>
+        <td>{{book.bk_stno}}</td>
+         <td ><a href="#" class="btn btn-success" onclick="return confirm">Edit</a>
+              <a href="#" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this book record?')">Delete</a>
+
+    </tr>
+  {% endfor %}
+</tbody>
+</table>
+{%else%}
+<h1>Have 0 book</h1>
+{%endif%}
+
+
+
+
+    </div>
+    <script type="text/javascript" src="{% static 'js/jquery-2.1.3.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.dataTables.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>
+{% endblock %}
+</body>
+</html>

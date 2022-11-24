@@ -1,0 +1,51 @@
+{% extends "base3.html" %}
+{% load static %}
+{% block body %}
+      <div class="card-body">
+        <p class="card-text">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Title</th>
+                  <th scope="col">Author</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Book Publoisher</th>
+                  <th scope="col">Published Year</th>
+                   <th scope="col">Published Agency</th>
+                  <th scope="col">Edition</th>
+                  <th scope="col">ISBN</th>
+                  <th scope="col">No of Pages</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Stock</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for i in book %}
+                  <tr>
+                    <td>{{ i.bk_title  }}</td>
+                    <td>{{ i.bk_author }}</td>
+                     <td>{{ i.bk_cat }}</td>
+                    <td>{{ i.bk_publisher}}</td>
+                    <td>{{ i.bk_pubyear }}</td>
+                    <td>{{ i.bk_pubagency }}</td>
+                      <td>{{ i.bk_edition }}</td>
+                      <td>{{ i.bk_isbn }}</td>
+                    <td>{{ i.bk_noofpages }}</td>
+                      <td>{{ i.bk_price }}</td>
+                     <td>{{ i.bk_stno}}</td>
+
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
+
