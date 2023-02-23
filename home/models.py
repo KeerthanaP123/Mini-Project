@@ -147,5 +147,9 @@ class tbl_BookIssue(models.Model):
     issue_id=models.AutoField(primary_key=True)
     reqid=models.ForeignKey(BookRequest,on_delete=models.CASCADE)
     date_of_issue=models.DateTimeField(auto_now_add=True)
+    issuedstatus=models.BooleanField(default=False)
 
-
+class tbl_BookReturn(models.Model):
+    return_id=models.AutoField(primary_key=True)
+    issue_id=models.ForeignKey(tbl_BookIssue,on_delete=models.CASCADE)
+    date_of_return=models.DateTimeField(auto_now_add=True)

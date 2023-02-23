@@ -2,20 +2,13 @@
 {% extends 'base5.html' %}
 {% block body %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+
 <body>
  <div class="card bg-light ms-4 me-4 mb-4">
       <div class="card-header">
           <i class="fa fa-book"></i><font color="green">View Issue Book</font>
       </div>
-      <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" action="{% url 'issuebooklib' %}">
 
-    </form>
       <div class="card-body">
         <p class="card-text">
           <div class="table-responsive">
@@ -28,7 +21,9 @@
                     <th scope="col"><font color="red">Last Name</font></th>
                     <th scope="col"><font color="red">Book Title</font></th>
                     <th scope="col"><font color="red">Author</font></th>
+                    <th scope="col"><font color="red">Category</font></th>
                     <th scope="col"><font color="red">Issued Date</font></th>
+                    <th scope="col"><font color="red">Action</font></th>
 
                        </tr>
               </thead>
@@ -40,8 +35,16 @@
                     <td scope="col"><strong>{{ i.reqid.userid.fname }}</strong></td>
                     <td scope="col"><strong>{{ i.reqid.userid.lname }}</strong></td>
                     <td scope="col"><strong>{{ i.reqid.bookid.bk_title }}</strong></td>
-                     <td scope="col"><strong>{{ i.reqid.bookid.bk_author }}</strong></td>
+                    <td scope="col"><strong>{{ i.reqid.bookid.bk_author }}</strong></td>
+                    <td scope="col"><strong>{{ i.reqid.bookid.bk_cat.cat_name }}</strong></td>
                     <td scope="col"><strong>{{ i.date_of_issue }}</strong></td>
+                    {% if i.issuedstatus %}
+                    <td ><a href="{% url 'returnbook' %}" class="btn btn-sm btn-success">Returned</a>
+                    {% else %}
+                    <td ><a href="{% url 'return_approve' i.issue_id %}" class="btn btn-sm btn-primary">Not Returned</a>
+                    {% endif %}
+
+
                     </tr>
                  {% endfor %}
                 </tbody>
@@ -51,5 +54,5 @@
       </div>
  </div>
 </body>
-</html>
+
 {% endblock %}

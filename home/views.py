@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect,loader
 from django.contrib.auth.models import auth , models
 from django.http import HttpResponse
-from home.models import Account,Book,BookRequest,tbl_BookIssue
+from home.models import Account,Book,BookRequest,tbl_BookIssue,tbl_BookReturn
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.urls import reverse
@@ -81,7 +81,7 @@ def reg(request):
             message,
             'ajcelibrary2023b@gmail.com',
             [email],
-            fail_silently=False,
+            # fail_silently=False,
         )
 
 
@@ -460,7 +460,8 @@ def requestbook(request,bk_id):
     return render(request, 'requestbook.html', context)
 
 def viewsrequest(request):
-    obj = BookRequest.objects.all
+    obj = BookRequest.objects.all()
+    print(obj)
     return render(request, 'viewsrequest.html', {'result': obj})
 
 def approved(request, id):
@@ -468,14 +469,26 @@ def approved(request, id):
     print(data)
     data.requestedstatus=True
     data.save()
-
     dt=tbl_BookIssue(reqid=data)
     dt.save()
     return  redirect('viewsrequest')
 
 def issuebooklib(request):
-    obj=tbl_BookIssue.objects.all
-    return render(request,'issuebooklib.html',{'result':obj})
-def issuedbookuser(request,id):
-    obj=tbl_BookIssue.objects.all
-    return render(request,'issuedbookuser.html',{'result':obj})
+    obj = tbl_BookIssue.objects.all()
+    print(obj)
+
+    return render(request,'issuebooklib.html', {'result': obj})
+
+def return_approve(request,id):
+    data = tbl_BookIssue.objects.get(issue_id=id)
+    print(data)
+    data.issuedstatus = True
+    data.save()
+    dt = tbl_BookReturn(issue_id=data)
+    dt.save()
+    return redirect('issuebooklib')
+
+
+def returnbook(request):
+    obj=tbl_BookReturn.objects.all
+    return render(request,'returnbook.html',{'result':obj})

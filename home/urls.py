@@ -34,8 +34,11 @@ urlpatterns= [
     path('requestbook/<int:bk_id>/',views.requestbook,name='requestbook'),
     path('approved/<int:id>/',views.approved,name='approved'),
     path('viewsrequest/',views.viewsrequest,name='viewsrequest'),
-    path('issuebooklib',views.issuebooklib,name='issuebooklib'),
-    path('issuedbookuser', views.issuedbookuser, name='issuedbookuser'),
+    path('issuebooklib/',views.issuebooklib,name='issuebooklib'),
+    path('return_approve/<int:id>/',views.return_approve,name='return_approve'),
+    path('returnbook/',views.returnbook,name='returnbook')
+    # path('issuedbookuser', views.issuedbookuser, name='issuedbookuser'),
+
 
 ]
 
