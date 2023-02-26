@@ -1,0 +1,62 @@
+{% load static %}
+{% block content %}
+{% include 'Message.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Book Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  </head>
+  <body class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+<!--        <a class="navbar-brand" href="{% url 'display' %}">-->
+<!--          <i class="fa-solid fa-graduation-cap fa-lg"></i> Book Management System-->
+<!--        </a>-->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'librarian' %}">
+                <i class="fa fa-backward"></i> Back
+              </a>
+            </li>
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link" href="{% url 'add' %}">-->
+<!--              </a>-->
+<!--            </li>-->
+            <div id="search" class="pop-overlay">
+                <div class="popup">
+                  <form action="{% url 'searchuser' %}" method="POST" class="d-sm-flex">
+                    {% csrf_token %}
+                    {% include 'Message.html' %}
+                    <input type="text" placeholder="Search.." name="query" required="required" >
+                    <button type="submit">Search</button>
+                    <a class="close" href="{% url 'searchuser' %}"></a>
+
+
+                  </form>
+                </div>
+              </div>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      {% block body %}
+      {% endblock %}
+    </div>
+    <footer class="mt-auto mb-4">
+      <div class="text-center">
+
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+{% endblock %}
+  </body>
+</html>

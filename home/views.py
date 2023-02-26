@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect,loader
 from django.contrib.auth.models import auth , models
 from django.http import HttpResponse
-from home.models import Account,Book,BookRequest,tbl_BookIssue,tbl_BookReturn
+from home.models import Account,Book,BookRequest,tbl_BookIssue,tbl_BookReturn,elibrary
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.urls import reverse
@@ -16,8 +16,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
 from django.core.mail import send_mail
 from home.forms import BookForm,userupdateform
-
-
+from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import login, logout, authenticate
 #
@@ -221,11 +220,6 @@ def activate(request, uidb64, token):
     else:
         messages.error(request, 'In-valid activation link')
         return redirect('reg')
-#
-#
-#
-#
-#
 
 def display(request):
     return render(request,'display.html',{
@@ -253,6 +247,8 @@ def add(request):
             bk_noofpages = form.cleaned_data['bk_noofpages']
             bk_price = form.cleaned_data['bk_price']
             bk_stno = form.cleaned_data['bk_stno']
+
+
             b = Book(bk_title=bk_title,
                     bk_author=bk_author,
                     bk_cat=bk_cat,
@@ -263,7 +259,8 @@ def add(request):
                     bk_isbn=bk_isbn,
                     bk_noofpages=bk_noofpages,
                     bk_price=bk_price,
-                    bk_stno=bk_stno
+                    bk_stno=bk_stno,
+
                      )
             b.save()
             return render(request,'add.html',{
@@ -425,6 +422,27 @@ def searchbar(request):
         }
         return HttpResponse(templates.render(context,request))
     # return render(request, 'searchbar.html', {})
+# def searchuser(request):
+#     if request.method == 'POST':
+#         query = request.POST.get('query')
+#         print(query)
+#         if query:
+#             # b = Book.objects.filter(bk_title__icontains=query).values_list('bk_title', 'bk_author','bk_cat')
+#             b=tbl_BookIssue.objects.filter(date_of_issue__icontains=query)
+#             print(b)
+#             for i in b:
+#                 print(i)
+#             context={
+#
+#                 'book':b,
+#                 'demo':'demo',
+#             }
+#
+#             return render(request,'searchuser.html',context)
+#     else:
+#         messages.info(request,'No search result!!!')
+#
+#     return render(request,'searchuser.html',{})
 
 def search(request):
     if request.method == 'GET':
@@ -441,11 +459,11 @@ def search(request):
                 'demo':'demo',
             }
 
-            return render(request, 'search.html', context)
+            return render(request,'search.html',context)
     else:
-        messages.info(request, 'No search result!!!')
+        messages.info(request,'No search result!!!')
 
-    return render(request, 'search .html', {})
+    return render(request,'search.html',{})
 
 
 def requestbook(request,bk_id):
@@ -492,3 +510,20 @@ def return_approve(request,id):
 def returnbook(request):
     obj=tbl_BookReturn.objects.all
     return render(request,'returnbook.html',{'result':obj})
+
+def elibraryy(request):
+    if request.method == 'POST':
+        title = request.POST['title']
+        book_author = request.POST['book_author']
+        book_pdf= request.POST['book_pdf']
+        print(title)
+        print(book_author)
+        print(book_pdf)
+        a=elibrary(title=title,book_author=book_author,book_pdf=book_pdf)
+        a.save()
+        messages.success(request,'Book Added Successfully!')
+    return render(request,'elibrary.html')
+
+def ebook(request):
+    obj = elibrary.objects.all
+    return render(request, 'ebookdisplay.html', {'result': obj})

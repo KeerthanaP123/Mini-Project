@@ -36,8 +36,9 @@ urlpatterns= [
     path('viewsrequest/',views.viewsrequest,name='viewsrequest'),
     path('issuebooklib/',views.issuebooklib,name='issuebooklib'),
     path('return_approve/<int:id>/',views.return_approve,name='return_approve'),
-    path('returnbook/',views.returnbook,name='returnbook')
-    # path('issuedbookuser', views.issuedbookuser, name='issuedbookuser'),
+    path('returnbook/',views.returnbook,name='returnbook'),
+    path('elibrary',views.elibraryy,name='elibrary'),
+    path('ebook',views.ebook,name='ebook')
 
 
 ]

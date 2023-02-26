@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import Group
-from . models import Category,Account,Book
+from . models import Category,Account,Book,elibrary
 from django.contrib.auth.admin import UserAdmin
 from django.http import HttpResponse
 import csv
@@ -26,6 +26,13 @@ admin.site.register(Book)
 class Categoryadmin(admin.ModelAdmin):
     list_display = ['cat_name']
     search_fields = ('cat_name',)
+class elibraryy(admin.ModelAdmin):
+    list_display = ['title','book_author','book_pdf']
+    ordering = ('title',)
+    search_fields = ('title', 'book_author',)
+    filter_horizontal = ()
+    list_per_page = 50
+admin.site.register(elibrary)
 
 class bookdisplay(admin.ModelAdmin):
     list_display = ['bk_title']

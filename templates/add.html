@@ -54,6 +54,11 @@
               <b style="color: blue; margin-left: 1px">Stock</b>
               {% render_field form.bk_stno class="form-control" placeholder="Enter Stock"  onkeyup='stockValidation(this)' %}
                <span class="error-msg" id="bk_stno"> </span><br>
+<!--              <b style="color: blue; margin-left: 1px">PDF</b>-->
+<!--              {% render_field form.bk_pdf class="form-control" placeholder="Enter Stock"  onkeyup='stockValidation(this)' %}-->
+<!--               <span class="error-msg" id="bk_pdf"> </span><br>-->
+
+
               <br>
               <button type="submit" class="btn btn-primary">Add</button>
               <a href="{% url 'display' %}" class="btn btn-secondary">Cancel</a>

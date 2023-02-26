@@ -22,18 +22,22 @@ class BookForm(forms.ModelForm):
             'bk_price': 'Book Price',
             'bk_stno': 'Book Stock',
 
+
+
+
         }
-widegts={
-    'bk_title':forms.TextInput(attrs={'class':'form-control'}),
-    'bk_author':forms.TextInput(attrs={'class':'form-control'}),
-    'bk_publisehr':forms.TextInput(attrs={'class':'form-control'}),
-    'bk_pubyear':forms.TextInput(attrs={'class':'form-control'}),
-    'bk_pubagency':forms.TextInput(attrs={'class':'form-control'}),
-    'bk_isbn':forms.TextInput(attrs={'class':'form-control'}),
-    'bk_noofpages':forms.TextInput(attrs={'class':'form-control'}),
-    'bk_price':forms.TextInput(attrs={'class':'form-control'}),
-    'bk_stno':forms.TextInput(attrs={'class':'form-control'}),
-}
+        widegts={
+            'bk_title':forms.TextInput(attrs={'class':'form-control'}),
+            'bk_author':forms.TextInput(attrs={'class':'form-control'}),
+            'bk_publisehr':forms.TextInput(attrs={'class':'form-control'}),
+            'bk_pubyear':forms.TextInput(attrs={'class':'form-control'}),
+            'bk_pubagency':forms.TextInput(attrs={'class':'form-control'}),
+            'bk_isbn':forms.TextInput(attrs={'class':'form-control'}),
+            'bk_noofpages':forms.TextInput(attrs={'class':'form-control'}),
+            'bk_price':forms.TextInput(attrs={'class':'form-control'}),
+            'bk_stno':forms.TextInput(attrs={'class':'form-control'})
+
+        }
 
 class userupdateform(forms.ModelForm):
     # email= forms.EmailField()
@@ -41,3 +45,5 @@ class userupdateform(forms.ModelForm):
     class Meta:
         model = Account
         fields = ['fname','lname','email','contact','address','city','state','pincode','dob']
+
+

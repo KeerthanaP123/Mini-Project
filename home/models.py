@@ -8,8 +8,6 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect,render
 from django.contrib import messages
 
-
-
 class MyAccountManager(BaseUserManager):
     def create_user(self, fname, lname, email, contact, address, city, state, pincode, dob,  is_customer, is_librarian,password=None):
 
@@ -127,6 +125,7 @@ class Book(models.Model):
 
 
 
+
     def __str__(self):
         return str(self.bk_title)+"["+str(self.bk_isbn)+']'
 
@@ -146,10 +145,16 @@ class BookRequest(models.Model):
 class tbl_BookIssue(models.Model):
     issue_id=models.AutoField(primary_key=True)
     reqid=models.ForeignKey(BookRequest,on_delete=models.CASCADE)
-    date_of_issue=models.DateTimeField(auto_now_add=True)
+    date_of_issue=models.DateField(auto_now_add=True)
     issuedstatus=models.BooleanField(default=False)
 
 class tbl_BookReturn(models.Model):
     return_id=models.AutoField(primary_key=True)
     issue_id=models.ForeignKey(tbl_BookIssue,on_delete=models.CASCADE)
     date_of_return=models.DateTimeField(auto_now_add=True)
+
+class elibrary(models.Model):
+    ebookid=models.AutoField(primary_key=True)
+    title=models.CharField(max_length=50,default='')
+    book_author=models.CharField(max_length=50,default='')
+    book_pdf=models.FileField(default=0,blank=True,null=True,upload_to='pdf')
